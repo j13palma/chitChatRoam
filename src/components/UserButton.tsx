@@ -1,0 +1,51 @@
+"use client";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import UserAvatar from "./UserAvatar";
+import { Session } from "next-auth";
+import { Button } from "@ui//button";
+import { signIn, signOut } from "next-auth/react";
+import { useSubscriptionStore } from "@/store/store";
+import { StarIcon } from "lucide-react";
+
+export default function UserButton({ session }: { session: Session | null }) {
+  const subscription = useSubscriptionStore((state) => state.subscription);
+  if (!session) {
+    return (
+      <Button variant="outline" onClick={() => signIn()}>
+        Sign In
+      </Button>
+    );
+  }
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <UserAvatar image={session.user?.image} name={session.user?.name} />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>{session.user?.name}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        {subscription?.status === "active" && (
+          <>
+            <DropdownMenuLabel className="flex animate-pulse items-center justify-center space-x-1 text-xs text-jam-400">
+              <StarIcon fill="#E935C1" />
+              <p>PRO</p>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              Manage
+              {/* <ManageAccountButton /> */}
+            </DropdownMenuItem>
+          </>
+        )}
+        <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}

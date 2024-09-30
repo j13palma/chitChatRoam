@@ -1,0 +1,10 @@
+- [ ] Add more ways to sign in
+- [ ] Lift shared state to Zustand
+- [ ] Check is member is already in chat to not add them
+- [ ] Invite users to sign-up who do not exist
+- [ ] Add CHATGPT conversations boosts
+- [ ] Add image sharing
+- [ ] Add voice recording
+- [ ] Add voice recoding translation
+- [ ] Change Delete API endpoint request to be a Server Action
+- [ ] Check if admin to delete chat
