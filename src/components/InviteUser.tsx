@@ -1,7 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { useToast } from '../ui/use-toast';
+import { useToast } from '@ui/use-toast';
 import useAdminId from '@/hooks/useAdminId';
 import { z } from 'zod';
 import { useSubscriptionStore } from '@/store/store';
@@ -16,20 +16,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
-import { Button } from '../ui/button';
+} from '@ui/dialog';
+import { Button } from '@ui/button';
 import { PlusCircleIcon } from 'lucide-react';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@ui/form';
+import { Input } from '@ui/input';
 import { getDocs, serverTimestamp, setDoc } from 'firebase/firestore';
 import { addChatRef, chatMembersRef } from '@/lib/converters/ChatMemebers';
-import { ToastAction } from '../ui/toast';
+import { ToastAction } from '@ui/toast';
 import { getUserByEmailRef } from '@/lib/converters/Users';
 import ShareLink from './ShareLink';
 
@@ -67,8 +61,8 @@ export default function InviteUser({ chatId }: InviteUserProps) {
     });
 
     // We need to get the users' current chats to check if they're about to exceed the PRO plan
-    const noOfUsersInChat = (await getDocs(chatMembersRef(chatId))).docs.map(
-      (doc) => doc.data()
+    const noOfUsersInChat = (await getDocs(chatMembersRef(chatId))).docs.map((doc) =>
+      doc.data()
     ).length;
 
     // Check if the user is about to exceed the PRO plan, which limits to 3 chats
@@ -82,8 +76,8 @@ export default function InviteUser({ chatId }: InviteUserProps) {
         variant: 'destructive',
         action: (
           <ToastAction
-            altText="Upgrade"
-            onClick={() => router.push('/chitchat/register')}
+            altText='Upgrade'
+            onClick={() => router.push('/register')}
           >
             Upgrade to PRO
           </ToastAction>
@@ -128,8 +122,7 @@ export default function InviteUser({ chatId }: InviteUserProps) {
         .catch(() => {
           toast({
             title: 'Error',
-            description:
-              'Uh oh, there was an error adding the user to the chat!',
+            description: 'Uh oh, there was an error adding the user to the chat!',
             variant: 'destructive',
           });
         });
@@ -145,35 +138,32 @@ export default function InviteUser({ chatId }: InviteUserProps) {
           onOpenChange={setOpen}
         >
           <DialogTrigger asChild>
-            <Button className="dark:text-midnight-950">
-              <PlusCircleIcon className="mr-1" />
+            <Button className='dark:text-midnight-950'>
+              <PlusCircleIcon className='mr-1' />
               Add User To Chat
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
+          <DialogContent className='sm:max-w-md'>
             <DialogHeader>
               <DialogTitle>Add User to Chat</DialogTitle>
               <DialogDescription>
-                Simply enter another user&apos;s email address to invite them to
-                this chat!
-                <span className="font-bold text-indigo-600">
-                  (Note: they must be registered)
-                </span>
+                Simply enter another user&apos;s email address to invite them to this chat!
+                <span className='font-bold text-indigo-600'>(Note: they must be registered)</span>
               </DialogDescription>
             </DialogHeader>
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="flex flex-col space-y-2"
+                className='flex flex-col space-y-2'
               >
                 <FormField
                   control={form.control}
-                  name="email"
+                  name='email'
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
                         <Input
-                          placeholder="john@doe.com"
+                          placeholder='john@doe.com'
                           {...field}
                         />
                       </FormControl>
@@ -182,8 +172,8 @@ export default function InviteUser({ chatId }: InviteUserProps) {
                   )}
                 />
                 <Button
-                  className="ml-auto w-full dark:text-midnight-950 sm:w-fit"
-                  type="submit"
+                  className='ml-auto w-full dark:text-midnight-950 sm:w-fit'
+                  type='submit'
                 >
                   Add To Chat
                 </Button>

@@ -21,7 +21,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@root/*": ["./*"],
-      "@chitChat/*": ["./src/components/ChatProject/*"],
+      "@chitChat/*": ["./src/components/*"],
       "@ui/*": ["./src/components/ui/*"]
     }
   },

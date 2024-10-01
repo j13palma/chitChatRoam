@@ -1,37 +1,31 @@
-"use server";
+'use server';
 
-import { auth } from "@/lib/nextAuth";
-import { adminDb } from "@/lib/firebase-admin";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import Stripe from "stripe";
+import { auth } from '@/lib/nextAuth';
+import { adminDb } from '@/lib/firebase-admin';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2024-06-20",
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY!, {
+  apiVersion: '2024-06-20',
 });
 
 export async function generatePortalLink() {
-  console.log("server action");
-
   const session = await auth();
-  const host = headers().get("host");
+  const host = headers().get('host');
 
-  if (!session?.user.id) return console.error("No user Id found");
+  if (!session?.user.id) return console.error('No user Id found');
 
-  console.log(session?.user.id);
   const {
     user: { id },
   } = session;
 
   const returnUrl =
-    process.env.NODE_ENV === "development"
-      ? `http://${host}/chitchat/register`
-      : `https://${host}/chitchat/register`;
+    process.env.NODE_ENV === 'development' ? `http://${host}/register` : `https://${host}/register`;
 
-  const doc = await adminDb.collection("customers").doc(id).get();
+  const doc = await adminDb.collection('customers').doc(id).get();
 
-  if (!doc.data)
-    return console.error("No customer record found with userId: ", id);
+  if (!doc.data) return console.error('No customer record found with userId: ', id);
 
   const stripeId = doc.data()!.stripeId;
 

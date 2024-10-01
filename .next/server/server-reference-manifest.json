@@ -1,0 +1,24 @@
+{
+  "node": {
+    "6c5b5007de53d8926b974372f669428a46283659": {
+      "workers": {
+        "app/page": "(rsc)/./node_modules/.pnpm/next@14.0.0_@babel+core@7.23.2_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fpalma%2FDocuments%2FCode-Palma%2FchitChatRoam%2Fsrc%2Futils%2FgeneratePortalLinks.ts%22%2C%5B%22generatePortalLink%22%5D%5D%5D&__client_imported__=!",
+        "app/(user)/chat/[chatId]/page": "(rsc)/./node_modules/.pnpm/next@14.0.0_@babel+core@7.23.2_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fpalma%2FDocuments%2FCode-Palma%2FchitChatRoam%2Fsrc%2Futils%2FgeneratePortalLinks.ts%22%2C%5B%22generatePortalLink%22%5D%5D%5D&__client_imported__=!",
+        "app/(user)/chat/page": "(rsc)/./node_modules/.pnpm/next@14.0.0_@babel+core@7.23.2_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fpalma%2FDocuments%2FCode-Palma%2FchitChatRoam%2Fsrc%2Futils%2FgeneratePortalLinks.ts%22%2C%5B%22generatePortalLink%22%5D%5D%5D&__client_imported__=!",
+        "app/not-found": "(action-browser)/./node_modules/.pnpm/next@14.0.0_@babel+core@7.23.2_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fpalma%2FDocuments%2FCode-Palma%2FchitChatRoam%2Fsrc%2Futils%2FgeneratePortalLinks.ts%22%2C%5B%22generatePortalLink%22%5D%5D%5D&__client_imported__=true!",
+        "app/register/page": "(rsc)/./node_modules/.pnpm/next@14.0.0_@babel+core@7.23.2_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fpalma%2FDocuments%2FCode-Palma%2FchitChatRoam%2Fsrc%2Futils%2FgeneratePortalLinks.ts%22%2C%5B%22generatePortalLink%22%5D%5D%5D&__client_imported__=!",
+        "app/pricing/page": "(rsc)/./node_modules/.pnpm/next@14.0.0_@babel+core@7.23.2_react-dom@18.2.0_react@18.2.0__react@18.2.0/node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fpalma%2FDocuments%2FCode-Palma%2FchitChatRoam%2Fsrc%2Futils%2FgeneratePortalLinks.ts%22%2C%5B%22generatePortalLink%22%5D%5D%5D&__client_imported__=!"
+      },
+      "layer": {
+        "app/page": "rsc",
+        "app/(user)/chat/[chatId]/page": "rsc",
+        "app/(user)/chat/page": "rsc",
+        "app/not-found": "action-browser",
+        "app/register/page": "rsc",
+        "app/pricing/page": "rsc"
+      }
+    }
+  },
+  "edge": {},
+  "encryptionKey": "HWpCfK9P8iTRPap/B24JkIQlpcXRmpxIh3LyQmAjN9c="
+}

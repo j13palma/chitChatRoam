@@ -1,5 +1,5 @@
-import ChatList from '@/components/ChatProject/ChatList';
-import ChatPermissionError from '@/components/ChatProject/ChatPermissionError';
+import ChatList from '@/components/ChatList';
+import ChatPermissionError from '@/components/ChatPermissionError';
 
 interface ChatsPageProps {
   params: {};
@@ -12,7 +12,7 @@ export default function ChatPage({ searchParams: { error } }: ChatsPageProps) {
   return (
     <div>
       {error && (
-        <div className="m-2">
+        <div className='m-2'>
           <ChatPermissionError />
         </div>
       )}

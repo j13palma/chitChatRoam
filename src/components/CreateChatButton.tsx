@@ -10,11 +10,8 @@ import LoadingSpinner from './LoadingSpinner';
 import { useToast } from '@ui/use-toast';
 import { v4 as uuidv4 } from 'uuid';
 import { getDocs, serverTimestamp, setDoc } from 'firebase/firestore';
-import {
-  addChatRef,
-  chatMembersCollectionGroupRef,
-} from '@/lib/converters/ChatMemebers';
-import { ToastAction } from '../ui/toast';
+import { addChatRef, chatMembersCollectionGroupRef } from '@/lib/converters/ChatMemebers';
+import { ToastAction } from '@ui/toast';
 
 export default function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
   const { data: session } = useSession();
@@ -26,7 +23,6 @@ export default function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
   if (!session) return;
 
   const createNewChat = async () => {
-    console.log('New Chat');
     setLoading(true);
     toast({
       title: 'Creating new chat...',
@@ -35,9 +31,9 @@ export default function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
     });
 
     // Check user Pro Status
-    const numOfChats = (
-      await getDocs(chatMembersCollectionGroupRef(session.user.id))
-    ).docs.map((doc) => doc.data()).length;
+    const numOfChats = (await getDocs(chatMembersCollectionGroupRef(session.user.id))).docs.map(
+      (doc) => doc.data()
+    ).length;
 
     // Check if the user is about to exceed the PRO plan which is 3 chats
     const isPro = subscription?.status === 'active';
@@ -50,7 +46,7 @@ export default function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
         variant: 'destructive',
         action: (
           <ToastAction
-            altText="Upgrade"
+            altText='Upgrade'
             onClick={() => router.push('/register')}
           >
             Upgrade to PRO
@@ -79,7 +75,7 @@ export default function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
           className: 'bg-green-600 text-white',
           duration: 3000,
         });
-        router.push(`/chitchat/chat/${chatId}`);
+        router.push(`/chat/${chatId}`);
       })
       .catch((error) => {
         console.error(error);
@@ -101,7 +97,7 @@ export default function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
         <Button
           variant={'default'}
           onClick={createNewChat}
-          className="text-white dark:text-midnight-950"
+          className='text-white dark:text-midnight-950'
         >
           {loading ? <LoadingSpinner /> : 'Create a New Chat'}
         </Button>
@@ -110,9 +106,9 @@ export default function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
 
   return (
     <Button
-      variant="outline"
+      variant='outline'
       onClick={() => createNewChat()}
-      className="w-10 px-2"
+      className='w-10 px-2'
     >
       {loading ? <LoadingSpinner /> : <MessageSquarePlusIcon />}
     </Button>

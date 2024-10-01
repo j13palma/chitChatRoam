@@ -1,19 +1,17 @@
-"use client";
+'use client';
 
-import useAdminId from "@/hooks/useAdminId";
-import { ChatMembers, chatMembersRef } from "@/lib/converters/ChatMemebers";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import LoadingSpinner from "./LoadingSpinner";
-import { Badge } from "../ui/badge";
-import UserAvatar from "./UserAvatar";
+import useAdminId from '@/hooks/useAdminId';
+import { ChatMembers, chatMembersRef } from '@/lib/converters/ChatMemebers';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import LoadingSpinner from './LoadingSpinner';
+import { Badge } from '@ui/badge';
+import UserAvatar from './UserAvatar';
 
 interface ChatMembersBadgeProps {
   chatId: string;
 }
 export default function ChatMembersBadge({ chatId }: ChatMembersBadgeProps) {
-  const [members, loading, error] = useCollectionData<ChatMembers>(
-    chatMembersRef(chatId),
-  );
+  const [members, loading, error] = useCollectionData<ChatMembers>(chatMembersRef(chatId));
 
   const adminId = useAdminId({ chatId });
 
@@ -35,18 +33,24 @@ export default function ChatMembersBadge({ chatId }: ChatMembersBadgeProps) {
   });
   return (
     !loading && (
-      <div className="m-5 rounded-xl border p-2">
-        <div className="flex flex-wrap items-center justify-center gap-2 p-2 md:justify-start">
+      <div className='m-5 rounded-xl border p-2'>
+        <div className='flex flex-wrap items-center justify-center gap-2 p-2 md:justify-start'>
           {members?.map((member) => (
-            <Badge variant="secondary" key={member.email}>
-              <div className="flex h-14 space-x-2 p-5 pl-2 pr-5">
-                <div className="flex items-center space-x-2">
-                  <UserAvatar name={member.email} image={member.image} />
+            <Badge
+              variant='secondary'
+              key={member.email}
+            >
+              <div className='flex h-14 space-x-2 p-5 pl-2 pr-5'>
+                <div className='flex items-center space-x-2'>
+                  <UserAvatar
+                    name={member.email}
+                    image={member.image}
+                  />
                 </div>
                 <div>
                   <p>{member.email}</p>
                   {member.userId === adminId && (
-                    <p className="animate-pulse text-indigo-400">Admin</p>
+                    <p className='animate-pulse text-indigo-400'>Admin</p>
                   )}
                 </div>
               </div>

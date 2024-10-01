@@ -1,17 +1,12 @@
-import "server-only";
-import { FirestoreAdapter } from "@auth/firebase-adapter";
-import {
-  GetServerSidePropsContext,
-  NextApiRequest,
-  NextApiResponse,
-} from "next";
-import { getServerSession, type NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import { adminAuth, adminDb } from "./firebase-admin";
+import { FirestoreAdapter } from '@auth/firebase-adapter';
+import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession, type NextAuthOptions } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+import { adminAuth, adminDb } from './firebase-admin';
 
 export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
-  adapter: FirestoreAdapter(adminDb) as NextAuthOptions["adapter"],
+  adapter: FirestoreAdapter(adminDb) as NextAuthOptions['adapter'],
   callbacks: {
     jwt: async ({ user, token }) => {
       if (user) {
@@ -31,21 +26,26 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+      clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
     // ...add more providers here
   ],
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
 };
 
 export function auth(
   ...args:
-    | [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]]
+    | [GetServerSidePropsContext['req'], GetServerSidePropsContext['res']]
     | [NextApiRequest, NextApiResponse]
     | []
 ) {
-  return getServerSession(...args, authOptions);
+  try {
+    return getServerSession(...args, authOptions);
+  } catch (error) {
+    console.error('Error fetching server session:', error);
+    throw new Error('Failed to get server session');
+  }
 }

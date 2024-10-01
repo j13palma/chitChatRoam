@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
-import { useToast } from '../ui/use-toast';
+import { useToast } from '@ui/use-toast';
 import useAdminId from '@/hooks/useAdminId';
 import {
   Dialog,
@@ -12,8 +12,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
-import { Button } from '../ui/button';
+} from '@ui/dialog';
+import { Button } from '@ui/button';
 import { Trash2 } from 'lucide-react';
 
 interface DeleteChatProps {
@@ -33,8 +33,6 @@ export default function DeleteChat({ chatId }: DeleteChatProps) {
       description: 'Please wait while we delete the chat...',
     });
 
-    console.log('Deleting :: ', chatId);
-
     await fetch('/api/chat/delete', {
       method: 'DELETE',
       headers: {
@@ -49,7 +47,7 @@ export default function DeleteChat({ chatId }: DeleteChatProps) {
           className: 'bg-green-600 text-white',
           duration: 3000,
         });
-        router.replace('/chitchat/chat');
+        router.replace('/chat');
       })
       .catch((err) => {
         console.error(err.message);
@@ -71,31 +69,29 @@ export default function DeleteChat({ chatId }: DeleteChatProps) {
       >
         <DialogTrigger asChild>
           <Button
-            className="dark:border-red-600"
-            variant="destructive"
+            className='dark:border-red-600'
+            variant='destructive'
           >
-            <Trash2 className="mr-2" />
+            <Trash2 className='mr-2' />
             Delete Chat
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className='sm:max-w-md'>
           <DialogHeader>
             <DialogTitle>Are you sure?</DialogTitle>
-            <DialogDescription>
-              This will delete the chat for all users.
-            </DialogDescription>
+            <DialogDescription>This will delete the chat for all users.</DialogDescription>
           </DialogHeader>
-          <div className="grid grid-cols-2 space-x-2">
+          <div className='grid grid-cols-2 space-x-2'>
             <Button
-              className="dark:border-red-600"
+              className='dark:border-red-600'
               onClick={handleDelete}
-              variant="destructive"
+              variant='destructive'
             >
               Delete
             </Button>
             <Button
               onClick={() => setOpen(false)}
-              variant="outline"
+              variant='outline'
             >
               Cancel
             </Button>

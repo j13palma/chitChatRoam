@@ -1,3 +1,6 @@
+# TODO
+
+- [x] Signout page reroute to Home
 - [ ] Add more ways to sign in
 - [ ] Lift shared state to Zustand
 - [ ] Check is member is already in chat to not add them
