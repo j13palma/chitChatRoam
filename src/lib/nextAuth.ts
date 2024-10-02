@@ -10,37 +10,34 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     jwt: async ({ user, token }) => {
       if (user) {
+        console.log('User during JWT callback:', user);
         token.sub = user.id;
       }
       return token;
     },
     session: async ({ session, token }) => {
       if (session?.user && token.sub) {
+        console.log('Session during session callback:', session);
         session.user.id = token.sub;
 
-        const firebaseToken = await adminAuth.createCustomToken(token.sub);
-        session.firebaseToken = firebaseToken;
+        try {
+          const firebaseToken = await adminAuth.createCustomToken(token.sub);
+          session.firebaseToken = firebaseToken;
+        } catch (error) {
+          console.error('Error creating Firebase custom token:', error);
+        }
       }
       return session;
     },
   },
   cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
+    pkceCodeVerifier: {
+      name: 'next-auth.pkce.code_verifier',
       options: {
         httpOnly: true,
-        sameSite: 'lax', // Adjust this based on your app needs (strict, lax, none)
+        sameSite: 'none',
         path: '/',
-        secure: process.env.NODE_ENV === 'production', // Use Secure cookies in production
-      },
-    },
-    csrfToken: {
-      name: `__Host-next-auth.csrf-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: process.env.NODE_ENV === 'production',
+        secure: true,
       },
     },
   },
