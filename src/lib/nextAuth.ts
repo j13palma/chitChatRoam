@@ -8,14 +8,14 @@ export const authOptions: NextAuthOptions = {
   // Configure one or more authentication providers
   adapter: FirestoreAdapter(adminDb) as NextAuthOptions['adapter'],
   callbacks: {
-    jwt: async ({ user, token }) => {
+    async jwt({ user, token }) {
       if (user) {
         console.log('User during JWT callback:', user);
         token.sub = user.id;
       }
       return token;
     },
-    session: async ({ session, token }) => {
+    async session({ session, token }) {
       if (session?.user && token.sub) {
         console.log('Session during session callback:', session);
         session.user.id = token.sub;
@@ -28,17 +28,6 @@ export const authOptions: NextAuthOptions = {
         }
       }
       return session;
-    },
-  },
-  cookies: {
-    pkceCodeVerifier: {
-      name: 'next-auth.pkce.code_verifier',
-      options: {
-        httpOnly: true,
-        sameSite: 'none',
-        path: '/',
-        secure: true,
-      },
     },
   },
   providers: [

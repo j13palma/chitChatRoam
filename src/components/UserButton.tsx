@@ -27,7 +27,7 @@ export default function UserButton({
     return (
       <Button
         variant='outline'
-        onClick={() => signIn()}
+        onClick={async () => await signIn()}
       >
         Sign In
       </Button>
